@@ -1,0 +1,132 @@
+{% extends 'base3.html' %}
+
+{% block nav_link_recruitereditprofile %}
+active
+{% endblock %}
+
+{% block POP_UP_Message %}
+Your Profile has been Saved Successfully.
+{% endblock %}
+
+{% block Reference_POP_UP_Message %}
+{{ url_for('recruiterprofile') }} 
+{% endblock %}
+
+{% block colors %}
+<style>
+    body {
+        background-color: rgb(231, 225, 225);
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+
+    .new label:after {
+        content: " *";
+        color: red;
+    }
+
+    .line {
+        border-bottom: 2px solid rgb(158, 157, 157);
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<section class="form my-5">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h1 class="font-weight-bold py-0">Let's Edit Your Profile</h1>
+            </div>
+            <form action="{{ url_for('recruitereditprofile') }}" class="form-register row g-3 needs-validation" method="post">
+                {{ form.csrf_token }}
+                {{ form.hidden_tag() }}
+                <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">Last name</label>
+                    <input disabled type="text" class="form-control" id="validationCustom01" value="{{ lname }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">First name</label>
+                    <input disabled type="text" class="form-control" id="validationCustom02" value="{{ fname }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="validationCustom03" class="form-label">Middle name</label>
+                    <input disabled type="text" class="form-control" id="validationCustom03" value="{{ mname }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="validationCustomphoneno." class="form-label">Phone No.</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">+91</span>
+                        <input disabled type="tel" class="form-control" id="validationCustomphoneno." value="{{ phone_no }}"
+                            aria-describedby="inputGroupPrepend" required>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="validationCustom04" class="form-label">Email</label>
+                    <input disabled type="text" class="form-control" id="validationCustom04" value="{{ email_address }}">
+                </div>
+
+                <div class="new col-md-4">
+                    {{ form.nameofc.label(class="form-label") }}
+                    {{ form.nameofc(class="form-control", value=cname) }}
+                    
+                </div>
+
+                <div class="new col-md-6">
+                    {{ form.state.label(class="form-label") }}
+                    {% set f = form.state.process_data(cstate) %}
+                    {{ form.state(class="form-select form-control", value=cstate) }}
+                    
+                </div>
+
+                <div class="new col-md-6">
+                    {{ form.city.label(class="form-label") }}
+                    {{ form.city(class="form-control", value=ccity) }}
+                    
+                </div>
+
+                <div class="new col-md-9">
+                    {{ form.address.label(class="form-label") }}
+                    {{ form.address(class="form-control", value=caddress) }}
+                    
+                </div>
+
+                <div class="new col-md-3">
+                    {{ form.pin_code.label(class="form-label") }}
+                    {{ form.pin_code(class="form-control", value=cpin_code) }}
+                    
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <div class="form-row card-body text-center">
+                    <div class="col-lg-5 wrapper text-center">
+                        <!--<a href="#myModal" data-toggle="modal">-->
+                        {{ form.submit(class="btn1 mt-3 mb-4 btn trigger-btn btn-outline btn-primary") }}
+                    </div>
+            </form>
+
+
+    </div>
+</section>
+{% endblock %}

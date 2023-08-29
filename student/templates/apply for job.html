@@ -1,0 +1,223 @@
+{% extends 'base2.html' %}
+
+{% block nav_link_applyforjob %}
+active
+{% endblock %}
+
+{% block POP_UP_Message %}
+You have Applied Successfully.
+{% endblock %}
+
+{% block Reference_POP_UP_Message %}
+{{ url_for('applyforjob') }} 
+{% endblock %}
+
+{% block colors %}
+<style>
+
+    body {
+        background-color: rgb(231, 225, 225);
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+
+        box-shadow: 0px 5px 10px grey;
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 35px;
+        width: 14%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+        position: absolute;
+        right: 17px;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<section class="form my-5">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h1 class="font-weight-bold py-0">Let's Apply for the Job</h1>
+            </div>
+            <h2 class="font-weight-bold py-0"><i class="bi bi-card-list"></i> List of Companies </h2>
+                {% for job in jobs %}
+                    
+                    <form action="{{ url_for('applyforjob') }}" class="form-register row g-3 px-4 py-3" method="post">
+                        {{ form.csrf_token }}
+                        {{ form.hidden_tag() }}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-now">
+                                    <div class="col-lg-3">
+                                        {% if job.cstatus==NULL %}
+                                            {{ form.apply(class="btn1 mt-3 mb-4 trigger-btn btn-primary") }}
+                                        {% else %}
+                                            {{ form.apply(class="btn1 mt-3 mb-4 trigger-btn btn-primary", value="Applied") }}
+                                        {% endif %}
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-now">
+                                    <div class="col-lg-3">
+                                        
+                                    
+                                    </div>
+                                    
+                                </div>
+
+                                <!--{{ form.value(class="form-control",value=job.cposition, style="visibility: hidden;") }}-->
+                                
+                                <h4 class="card-title">
+                                    {{ form.value(class="form-control",value=job.cname) }}
+                                    {{ job.cname }}<br />
+                                    {{ form.value1(class="form-control",value=job.cposition) }}
+                                </h4>
+
+                                <div class="col-md-12">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    {{ job.ccity }}, {{ job.cstate }}<br />
+                                </div>
+                                <div class="col-md-12">
+                                    <strong>Address:</strong>
+                                    {{ job.caddress }}<br />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <strong>Qualification Required:</strong>
+                                    {{ job.cqualification }}<br />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <strong>Position:</strong>
+                                    {{ job.cposition }}<br />
+                                </div>
+
+                                <div class="new col-md-4">
+                                    <strong>Salary Range:</strong>
+                                    {{ job.csalary }}<br />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <strong>Job Decription:</strong>
+                                    <br />
+                                    {% for x in job.cdesc.split("\n") %}
+                                        {{ x }}
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                {% endfor %}
+<!--
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#myModal" class="btn btn1"
+                            role="button" data-toggle="modal">Apply</a>
+                            Microsoft<br />
+                        </h4>
+
+
+                        <div class="col-md-12">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Mumbai, Maharashtra<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Address:</strong>
+                            Powai, 400705<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Qualification Required:</strong>
+                            Btech<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Position:</strong>
+                            Employee<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Salary Range:</strong>
+                            100k<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Job Decription:</strong>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit eveniet nihil sequi, enim
+                            voluptate nesciunt veniam ipsum mollitia minus alias error, facilis debitis eum praesentium
+                            saepe totam, deserunt modi? Magni non perferendis hic sit excepturi quia doloremque vel, cum
+                            cumque.<br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#myModal" class="btn btn1"
+                            role="button" data-toggle="modal">Apply</a>
+                            TCS<br />
+                        </h4>
+
+
+                        <div class="col-md-12">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Mumbai, Maharashtra<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Address:</strong>
+                            Powai, 400705<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Qualification Required:</strong>
+                            Btech<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Position:</strong>
+                            Employee<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Salary Range:</strong>
+                            100k<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Job Decription:</strong>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit eveniet nihil sequi, enim
+                            voluptate nesciunt veniam ipsum mollitia minus alias error, facilis debitis eum praesentium
+                            saepe totam, deserunt modi? Magni non perferendis hic sit excepturi quia doloremque vel, cum
+                            cumque.<br />
+                        </div>
+                    </div>
+                </div>-->
+            
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,266 @@
+{% extends 'base3.html' %}
+
+{% block nav_link_recruitersendapproval %}
+active 
+{% endblock %}
+
+{% block POP_UP_Message %}
+You have Approved Successfully.
+{% endblock %}
+
+{% block Reference_POP_UP_Message %}
+{{ url_for('recruitersendapproval') }} 
+{% endblock %}
+
+{% block colors %}
+<style>
+    body {
+        background-color: rgb(231, 225, 225);
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px grey;
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 35px;
+        width: 14%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        position: absolute;
+        right: 17px;
+    }
+    
+
+    .btn2 {
+        border: none;
+        outline: none;
+        height: 38px;
+        width: 230%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+    }
+
+    .btn2:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+    
+    .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+
+</style>
+{% endblock %}
+<!--font-weight: bold;-->
+
+{% block content %}
+
+<section class="form my-5">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h1 class="font-weight-bold py-0">Let's Recruit People</h1>
+            </div>
+            <h2 class="font-weight-bold py-0"><i class="bi bi-card-list"></i> List of Applicants </h2>
+            {% if applied1 %}
+                {% for data in applied1 %}
+                    {% if data.cstatus=="Pending" %}
+                        <form action="{{ url_for('recruitersendapproval') }}" class="form-register row g-3 px-4 py-3" method="post">
+                            {{ form.csrf_token }}
+                            {{ form.hidden_tag() }}
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+
+                                        {{ form.approve(class="btn1 btn-primary") }}
+                                        {{ form.position(class="form-control", value=data.cposition) }}
+                                        {{data.lname}} {{data.fname}} {{data.mname}}<br />
+                                        {{ form.txt_resume(class="form-control", value=data.txt_resume) }}
+                                    </h4>
+
+                                    <div class="col-md-12">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        {{data.city}}, {{data.state}}<br />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <strong>Position:</strong>
+                                        {{data.cposition}}<br />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <strong>Date of birth:</strong>
+                                        {{data.dob}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <strong>Gender:</strong>
+                                        {{data.gender}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <strong>Phone No.</strong>
+                                        {{data.phone_no}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <strong>Email:</strong>
+                                        {{data.email_address}}
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <strong>Address:</strong>
+                                        {{data.address}}, {{data.pin_code}}<br />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <strong>Graduated in:</strong>
+                                        {{data.g_course}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <strong>Percentage/CGPA:</strong>
+                                        {{data.g_percentage}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <strong>Name of the Institute.</strong>
+                                        {{data.g_institute}} 
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <strong>Skill:</strong>
+                                        <br />
+                                        {% if data.skill %}
+                                            {% for x in data.skill.split("\n") %}
+                                                {{ x }}
+                                                <br>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <!--<div class="form-now col-lg-1 text-center">
+                                        <a href="#"
+                                            class="btn2 mt-3 mb-1  btn btn-outline btn-white btn-md active" role="button">Download Resume</a> 
+                                        {{ form.download(class="btn2 mt-3 mb-1 trigger-btn btn-primary") }}
+                                    </div>-->
+                                    <div class="form-row">
+                                        <div class="col-lg-1">
+                                            {{ form.download(class="btn2 mt-3 mb-1 btn-primary") }}
+                                        </div>
+                                        <!--
+                                        <div class="btn col-lg-7">
+                                            <a href="{{ url_for('studentprofile') }}"class="btn1 mt-3 mb-4 btn btn-white btn-lg active" 
+                                            role="button" aria-pressed="true">Login</a>
+                                        </div>
+                                        -->
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </form>
+                        <br />
+                    {% endif %}
+                {% endfor %}
+            {% endif %}    
+<!--
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#myModal" class="btn btn1"
+                            role="button" data-toggle="modal">Approve</a>
+                            BHUVANESHWAR SRINIVAS RAO GUTTULA<br />
+                        </h4>
+
+                        <div class="col-md-12">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Mumbai, Maharashtra<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Date of birth:</strong>
+                            01/12/2002 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Gender:</strong>
+                            Male &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Phone No.</strong>
+                            1234567890 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Email:</strong>
+                            @gmail.com
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Address:</strong>
+                            Vashi, 400705<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Graduated in:</strong>
+                            Btech (IT) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Percentage/CGPA:</strong>
+                            10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Name of your Institute.</strong>
+                            Pillai College of Engineering, New Panvel 
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Skill:</strong>
+                            Python, C, Java<br />
+                        </div>
+                        <div class="col-lg-1 wrapper text-center">
+                            <a href="#"
+                                class="btn2 mt-3 mb-1  btn btn-outline btn-white btn-md active" role="button">Download Resume</a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#myModal" class="btn btn1"
+                            role="button" data-toggle="modal">Approve</a>
+                            ISHAAN DWIVEDI<br />
+                        </h4>
+
+                        <div class="col-md-12">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Mumbai, Maharashtra<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Date of birth:</strong>
+                            01/12/2002 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Gender:</strong>
+                            Male &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Phone No.</strong>
+                            1234567890 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Email:</strong>
+                            @gmail.com
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Address:</strong>
+                            Kharghar, 400705<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Graduated in:</strong>
+                            Btech (IT) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Percentage/CGPA:</strong>
+                            10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <strong>Name of your Institute.</strong>
+                            Pillai College of Engineering, New Panvel 
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Skill:</strong>
+                            Python, C, Java<br />
+                        </div>
+                        <div class="col-lg-1 wrapper text-center">
+                            <a href="#"
+                                class="btn2 mt-3 mb-1  btn btn-outline btn-white btn-md active" role="button">Download Resume</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        -->
+    </div>
+</section>
+{% endblock %}

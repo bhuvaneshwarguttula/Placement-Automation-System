@@ -1,0 +1,126 @@
+{% extends 'base3.html' %}
+
+{% block nav_link_recruiterprofile %}
+active
+{% endblock %}
+
+{% block colors %}
+<style>
+    body {
+        background-color: rgb(231, 225, 225);
+    }
+
+    .card {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-size: 20px;
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    .line {
+        border-bottom: 2px solid rgb(211, 209, 209);
+    }
+
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<section class="form my-5">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h1 class="font-weight-bold py-0">Welcome {{ fname }}!</h1>
+            </div>
+            <section class="card py-3">
+                <div class="container">
+                    <form class="row g-3 px-4 py-3 needs-validation " novalidate>
+
+                        <h3 class="font-weight-bold py-0"><i class="bi bi-person-lines-fill"></i> Personal Information</h3>
+
+                        <br /><br />
+                        <div class="col-md-4">
+                            <strong>Last name:</strong>
+                            {{ lname }}<br />
+                        </div>
+
+                        <div class="col-md-4">
+                            <strong>First name:</strong>
+                            {{ fname }}<br />
+                        </div>
+
+                        <div class="col-md-4">
+                            <strong>Middle name:</strong>
+                            {{ mname }}<br />
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Phone No.</strong>
+                            {{ phone_no }}<br />
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Email:</strong>
+                            {{ email_address }}<br />
+                        </div>
+
+                        <span class="line py-2 my-3"></span>
+
+                        <h3 class="font-weight-bold py-0"><i class="bi bi-building"></i> Company Details</h3>
+
+                        <div class="col-md-6">
+                            <strong>Name of the Company:</strong>
+                            {{ cname }}<br />
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>State:</strong>
+                            {{ cstate }}<br />
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>City:</strong>
+                            {{ ccity }}<br />
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Pin Code:</strong>
+                            {{ cpin_code }}<br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Address:</strong>
+                            {{ caddress }}<br />
+                        </div>
+
+                        <span class="line py-2 my-3"></span>
+                        
+                    </form>
+                </section>
+    
+    
+        </div>
+    </section>
+    
+    
+    {% endblock %}
