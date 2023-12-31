@@ -1,0 +1,211 @@
+{% extends 'base2.html' %}
+
+{% block nav_link_studentpastapplications %}
+active
+{% endblock %}
+
+{% block POP_UP_Message %}
+Your have applied successfully.
+{% endblock %}
+
+{% block Reference_POP_UP_Message %}
+{{ url_for('applyforjob') }}
+{% endblock %}
+
+{% block colors %}
+<style>
+    body {
+        background-color: rgb(231, 225, 225);
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+
+        box-shadow: 0px 5px 10px grey;
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 35px;
+        width: 14%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+        position: absolute;
+        right: 17px;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="form my-5">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h1 class="font-weight-bold py-0">Job Manager</h1>
+            </div>
+            <h2 class="font-weight-bold py-0"><i class="bi bi-card-checklist"></i> My Job Applications </h2>
+            {% if data %}
+                {% for record in data %}
+                    <form class="row g-4  needs-validation" novalidate>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <dl class="row">
+                                    <dt class="col-sm-6"><h4 class="card-title">
+                                        {{ record["cname"] }}<br />
+                                    </h4></dt>
+                                    <dd class="col-sm-6" style=" font-size:18px; text-align:right;"><strong>Status:</strong>
+                                        {{ record["cstatus"] }}<br /></dd>
+                                </dl>
+
+                            <div class="col-md-6">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                {{ record["ccity"] }}, {{ record["cstate"] }}<br />
+                            </div>
+
+                            <div class="col-md-12">
+                                <strong>Address:</strong>
+                                {{ record["caddress"] }}<br />
+                            </div>
+
+                            <div class="col-md-4">
+                                <strong>Qualification Required:</strong>
+                                {{ record["cqualification"] }}<br />
+                            </div>
+
+                            <div class="col-md-4">
+                                <strong>Position:</strong>
+                                {{ record["cposition"] }}<br />
+                            </div>
+
+                            <div class="col-md-4">
+                                <strong>Salary Range:</strong>
+                                {{ record["csalary"] }}<br />
+                            </div>
+
+                            <div class="col-md-12">
+                                <strong>Job Decription:</strong>
+                                <br />
+                                {% for x in record["cdesc"].split("\n") %}
+                                        {{ x }}
+                                        <br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    <br />
+                {% endfor %}
+            {% endif %}
+        </div>
+    <!--
+        
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-6"><h4 class="card-title">
+                    Microsoft<br />
+                </h4></dt>
+                <dd class="col-sm-6" style=" font-size:18px; text-align:right;"><strong>Status:</strong>
+                    Pending<br /></dd>
+            </dl>
+
+
+            <div class="col-md-6">
+                <i class="bi bi-geo-alt-fill"></i>
+                Mumbai, Maharashtra<br />
+            </div>
+
+            <div class="col-md-12">
+                <strong>Address:</strong>
+                Powai, 400705<br />
+            </div>
+
+            <div class="col-md-4">
+                <strong>Qualification Required:</strong>
+                Btech<br />
+            </div>
+
+            <div class="col-md-4">
+                <strong>Position:</strong>
+                Employee<br />
+            </div>
+
+            <div class="col-md-4">
+                <strong>Salary Range:</strong>
+                100k<br />
+            </div>
+
+            <div class="col-md-12">
+                <strong>Job Decription:</strong>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit eveniet nihil sequi, enim
+                voluptate nesciunt veniam ipsum mollitia minus alias error, facilis debitis eum praesentium
+                saepe totam, deserunt modi? Magni non perferendis hic sit excepturi quia doloremque vel, cum
+                cumque.<br />
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-6"><h4 class="card-title">
+                    TCS<br />
+                </h4></dt>
+                <dd class="col-sm-6" style=" font-size:18px; text-align:right;"><strong>Status:</strong>
+                    Pending<br /></dd>
+            </dl>
+
+
+            <div class="col-md-6">
+                <i class="bi bi-geo-alt-fill"></i>
+                Mumbai, Maharashtra<br />
+            </div>
+
+            <div class="col-md-12">
+                <strong>Address:</strong>
+                Powai, 400705<br />
+            </div>
+
+            <div class="col-md-4">
+                <strong>Qualification Required:</strong>
+                Btech<br />
+            </div>
+
+            <div class="col-md-4">
+                <strong>Position:</strong>
+                Employee<br />
+            </div>
+
+            <div class="col-md-4">
+                <strong>Salary Range:</strong>
+                100k<br />
+            </div>
+
+            <div class="col-md-12">
+                <strong>Job Decription:</strong>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit eveniet nihil sequi, enim
+                voluptate nesciunt veniam ipsum mollitia minus alias error, facilis debitis eum praesentium
+                saepe totam, deserunt modi? Magni non perferendis hic sit excepturi quia doloremque vel, cum
+                cumque.<br />
+            </div>
+        </div>
+    </div>
+    </form>
+    -->
+    </div>
+</section>
+{% endblock %}

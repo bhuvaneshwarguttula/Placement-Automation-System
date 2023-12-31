@@ -1,0 +1,85 @@
+{% extends 'base2.html' %}
+
+{% block nav_link_uploadresume %}
+active
+{% endblock %}
+
+{% block colors %}
+<style>
+    body {
+        background-color: rgb(231, 225, 225);
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 70%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn2 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 20%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+
+    .btn2:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+    }
+
+    .new label:after {
+        content: " *";
+        color: red;
+    }
+    
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="form my-5">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h1 class="font-weight-bold py-0">Upload Your Resume</h1>
+            </div>
+
+            
+            <form action="{{ url_for('uploadresume') }}" method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                {{ form.hidden_tag() }}
+                <div class="form-row">
+                    <div class="input-group input-group-lg">
+                        {{ form.resume_pdf(class="form-control") }}
+                        
+                        <a href="#" class="btn2 btn-outline-dark btn btn-lg active"
+                            role="button" id="inputGroupFileAddon04">Upload</button></a>
+                        
+                    </div>
+                    <br>{{ filename }}
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-5">
+                        {{ form.submit(class="btn1 mt-3 mb-4 btn-primary") }}
+                    </div>
+            </form>
+
+    </div>
+</section>
+{% endblock %}
